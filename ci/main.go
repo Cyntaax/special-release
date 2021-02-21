@@ -12,12 +12,6 @@ import (
 )
 
 func main() {
-	wd, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		print("WORKING FROM", wd)
-	}
 	repo, _ := git.PlainOpen("../")
 	head, _ := repo.Head()
 	iter, _ := repo.Log(&git.LogOptions{From: head.Hash()})
@@ -54,11 +48,13 @@ func main() {
 
 		for _, patch := range pt.FilePatches() {
 			fr, _ := patch.Files()
-			fmt.Println(path.Dir(fr.Path()), path.Base(fr.Path()))
 
-			if matched, _ := path.Match("resources/*", fr.Path()); matched == false {
+			if matched, _ := path.Match("resources/**/*", fr.Path()); matched == false {
+				fmt.Println("Skipping", path.Base(fr.Path()))
 				continue
 			}
+
+			fmt.Println("Adding", path.Base(fr.Path()))
 
 
 			file, _ := tr.File(fr.Path())
