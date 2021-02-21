@@ -7,7 +7,7 @@
     ["@semantic-release/github", {
       "assets": [
         {
-          "path": "./ci/output.zip",
+          "path": "./ci/release.zip",
           "label": "Release Changes"
         }
       ]
