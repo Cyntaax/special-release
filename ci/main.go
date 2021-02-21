@@ -35,7 +35,11 @@ func main() {
 	tr, _ := currentCommit.Tree()
 
 	if parents >= 1 {
-		parent, _ := currentCommit.Parent(0)
+		parent, err := currentCommit.Parent(0)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
 		fmt.Println(parent.Hash)
 
 		pt, err := currentCommit.Patch(parent)
