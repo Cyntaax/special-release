@@ -12,6 +12,12 @@ import (
 )
 
 func main() {
+	wd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		print("WORKING FROM", wd)
+	}
 	repo, _ := git.PlainOpen("../")
 	head, _ := repo.Head()
 	iter, _ := repo.Log(&git.LogOptions{From: head.Hash()})
