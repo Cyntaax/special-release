@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing/object"
+	"path"
 )
 
 func main() {
@@ -31,7 +32,7 @@ func main() {
 
 		for _, patch := range pt.FilePatches() {
 			fr, to := patch.Files()
-			fmt.Println(fr.Path(), to.Path())
+			fmt.Println(path.Dir(fr.Path()), path.Dir(to.Path()))
 		}
 	}
 }
